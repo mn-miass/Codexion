@@ -4,14 +4,22 @@
 int ft_atoi(char *str)
 {
     int num;
+    int sign;
 
     num = 0;
+    sign = 1;
+    while(*str == '-' && *str == '+')
+    {
+        if(*str == '-')
+            sign = -1;
+        str++;
+    }
     while(*str)
     {
         num = num * 10 + (*str - '0');
         str++;
     }
-    return num;
+    return num * sign;
 }
 
 
@@ -38,6 +46,10 @@ int char_is_num(char c)
 
 int str_is_num(char *s)
 {
+    while(*s && (*s == '+'))
+        s++;
+    if (!*s)
+        return 0;
     while(*s)
     {
         if (!char_is_num(*s))
@@ -47,7 +59,16 @@ int str_is_num(char *s)
     return 1;
 }
 
-int main(int argc, char **argv)
+
+int ft_strlen(char *s)
 {
-    printf("%d", str_is_num(argv[1]));
+    int count;
+
+    count = 0;
+    while(*s)
+    {
+        s++;
+        count++;
+    }
+    return count;
 }
