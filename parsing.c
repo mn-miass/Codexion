@@ -46,7 +46,7 @@ void    get_error(int index)
     else if(index == 6)
         error_display("Dongle Cooldown must be positive integer");
     else if(index == 7)
-        error_display("Scheduler must be one of the folowing fifo or efi");
+        error_display("Scheduler must be one of the folowing fifo or edf");
     else if(index == 8)
         error_display("Allocation Failed");
 }
@@ -86,7 +86,7 @@ char    *get_char_argument(char *s)
         index++;
     }
     lower_s[index]= '\0';
-    if (ft_strcmp(lower_s, "fifo") || ft_strcmp(lower_s, "efi"))
+    if (ft_strcmp(lower_s, "fifo") || ft_strcmp(lower_s, "edf"))
         return lower_s;
     get_error(7);
 }
