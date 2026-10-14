@@ -8,8 +8,8 @@
 
 t_input parser(int argc, char **argv)
 {
-    int *integer_inputs;
-    char *scheduler;
+    int     *integer_inputs;
+    int     scheduler;
     t_input input;
 
     integer_inputs = get_int_arguments(argv + 1, argc - 1);
@@ -26,16 +26,33 @@ t_input parser(int argc, char **argv)
 }
 
 
+t_sim   *creat_sim(int argc, char **argv)
+{
+    t_sim       *sim;
+
+    sim = malloc(sizeof(t_sim))
+    if (sim == NULL)
+        return NULL;
+    sim->cfg = parser(argc, argv);
+    sim->coders = create_coders(sim->cfg);
+    if (sim->coders == NULL)
+        return NULL;
+    sim->dongles = create_dongles(sim->cfg);
+    if (sim->dongles == NULL)
+    {
+        free(sim->coders);
+        return NULL;
+    }
+    return &sim;
+}
+
+
 int main(int argc, char **argv)
 {
-    t_input     input;
-    t_coder     *coders;
-    t_dongle    *dongles;
+    t_sim       *sim;
 
-    input = parser(argc, argv);
-    coders = create_coders(input);
-    dongles = create_dongles(input);
-    if (coders == NULL || dongles == NULL)
+    sim = creat_sim(argc, argv);
+    if (sim == NULL)
         return 0;
 
 }

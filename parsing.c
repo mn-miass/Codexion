@@ -12,7 +12,7 @@ void    error_display(char *s)
 }
 
 
-t_input    fill_input_struct(int *inputs, char *schedular)
+t_input    fill_input_struct(int *inputs, int schedular)
 {
     t_input input;
 
@@ -23,7 +23,7 @@ t_input    fill_input_struct(int *inputs, char *schedular)
     input.time_to_refactor = inputs[4];
     input.number_of_compiles_required = inputs[5];
     input.dongle_cooldown = inputs[6];
-    input.scheduler = schedular;
+    input.edf = schedular;
 
     return input;
 }
@@ -87,6 +87,6 @@ char    *get_char_argument(char *s)
     }
     lower_s[index]= '\0';
     if (ft_strcmp(lower_s, "fifo") || ft_strcmp(lower_s, "edf"))
-        return lower_s;
+        return 1;
     get_error(7);
 }

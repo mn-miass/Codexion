@@ -16,9 +16,9 @@ t_coder *create_coders(t_input input)
     while (index < input.number_of_coders)
     {
         arr_coders[index].id = index + 1;
-        arr_coders[index].left_dongle = index;
-        arr_coders[index].right_dongle = (index + 1) % input.number_of_coders;
-        arr_coders[index].compile_count = 0;
+        arr_coders[index].first = index;
+        arr_coders[index].second = (index + 1) % input.number_of_coders;
+        arr_coders[index].completed = 0;
         arr_coders[index].last_compile_start = 0;
         index++;
     }
@@ -38,9 +38,9 @@ t_dongle *create_dongles(t_input input)
 
     while (index < input.number_of_coders)
     {
-        arr_dongles[index].is_taken = 0;
-        pthread_mutex_init(&arr_dongles[index].mutex, NULL);
-        arr_dongles[index].available_at = 0;
+        arr_dongles[index].owner = 0;
+        pthread_mutex_init(&arr_dongles[index].lock, NULL);
+        arr_dongles[index].ready_at = 0;
         index++;
     }
     return arr_dongles;
